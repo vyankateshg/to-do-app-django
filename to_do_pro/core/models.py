@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class task(models.Model):
+class Task(models.Model):
     TASK_TYPE = (
         ("daily","Daily"),
         ("goal","Goal")
@@ -18,7 +18,21 @@ class task(models.Model):
                                          ("low","Low")],default="medium")
     is_active = models.BooleanField(default=True)
 
-    
-       
+
+class task_log(models.Model):
+    task = models.ForeignKey("Task",
+                             on_delete=models.CASCADE,
+                             related_name="logs")
+    date = models.DateField()
+    completed = models.BooleanField(default=False)
+
+    completed_at = models.DateField()
+
+    note = models.TextField()
+
+    class Meta:
+        unique_together = ("task","date")
+        
+            
     
 
