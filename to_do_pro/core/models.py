@@ -10,7 +10,7 @@ class Task(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    due_date = models.DateField()
+    due_date = models.DateField(blank=True,null=True)
     type = models.CharField(choices=TASK_TYPE,default="daily",max_length=10)
     priority = models.CharField(max_length=10,
                                 choices=[("high","High"),
